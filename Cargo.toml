@@ -1,5 +1,10 @@
 [workspace]
+resolver = "2"
 
 members = [
-    "template-torneo",
+    "runner-torneo",
+    "template-torneo", 
+    "test-runner",
+    "test-runner-2"
 ]
+#[workspace.dependencies]
