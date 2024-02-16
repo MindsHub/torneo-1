@@ -65,7 +65,7 @@ pub fn run_turnament(da_valutare: &[(String, FnToImpl)], n: usize)->Vec<(String,
     
 
     //computing scoreboard
-    let mut scoreboard=HashMap::<String, i64>::new();
+    let mut scoreboard: HashMap::<String, i64>=   da_valutare.iter().map(|(s, _)| (s.clone(), 0)).collect();
     for (key, val) in v{
         if let Some(x) = scoreboard.get_mut(&key){
             *x+=val;
