@@ -1,5 +1,5 @@
 [package]
-name = "test-runner"
+name = "alessio-2"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 template-torneo = {path ="../template-torneo"}
+rand = "0.8"

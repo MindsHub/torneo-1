@@ -6,8 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rayon="1.8"
 colored="2.0"
 template-torneo = {path ="../template-torneo"}
-test-runner = {path ="../test-runner"}
-test-runner-2 = {path ="../test-runner-2"}
+alessio-1 = {path ="../alessio-1"}
+alessio-2 = {path ="../alessio-2"}
