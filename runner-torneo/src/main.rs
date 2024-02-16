@@ -16,7 +16,9 @@ macro_rules! register_crate {
 fn main() {
     let start = Instant::now();
     //Aggingi il tuo crate qui:
-    let da_valutare=register_crate!(alessio_1, alessio_2);
+    let da_valutare=
+    //aggiungi il tuo crate qua sotto: v
+    register_crate!(alessio_1, alessio_2);
     
     //calcolo classifica
     let scoreboard=runner::run_turnament(&da_valutare, 10000);
