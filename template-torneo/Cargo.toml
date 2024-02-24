@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 rayon="1.8"
+indicatif = {version = "*", features = ["rayon"]}

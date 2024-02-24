@@ -18,7 +18,7 @@ fn main() {
     //Aggingi il tuo crate qui:
     let da_valutare=
     //aggiungi il tuo crate qua sotto: v
-    register_crate!(alessio_1, alessio_2);
+    register_crate!(alessio_1, alessio_2, mattiaz_2);
     
     //calcolo classifica
     let scoreboard=runner::run_turnament(&da_valutare, 10000);

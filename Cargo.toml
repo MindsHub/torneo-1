@@ -5,6 +5,6 @@ members = [
     "runner-torneo",
     "template-torneo", 
     "alessio-1",
-    "alessio-2",
+    "alessio-2"
 ]
 #[workspace.dependencies]
