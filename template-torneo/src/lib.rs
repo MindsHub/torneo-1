@@ -30,7 +30,7 @@ impl LogTradimento {
         }
     }
     ///descrizione dettagliata delle operazioni svolte, per algoritmi più avanzati
-    pub fn azioni_passate(&self)->&Vec<bool>{
+    pub fn azioni_passate(&self) -> &Vec<bool> {
         &self.azioni
     }
     /// usata dall'esecutore

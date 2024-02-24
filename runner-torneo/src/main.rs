@@ -1,4 +1,3 @@
-
 use std::time::Instant;
 
 use colored::Colorize;
@@ -18,16 +17,21 @@ fn main() {
     //Aggingi il tuo crate qui:
     let da_valutare=
     //aggiungi il tuo crate qua sotto: v
-    register_crate!(alessio_1, alessio_2, mattiaz_2);
+    register_crate!(alessio_1, alessio_2, leo_2, mattiaz_2);
     
     //calcolo classifica
     let scoreboard=runner::run_turnament(&da_valutare, 10000);
 
+    //calcolo classifica
+    let scoreboard = runner::run_turnament(&da_valutare, 10000);
 
     //visualizzazione classifica
     println!("Posizione Nome Punteggio");
-    for (i, (name, points)) in scoreboard.iter().enumerate(){
-        println!("{}) {}: {}", i+1, name.green(), *points)
+    for (i, (name, points)) in scoreboard.iter().enumerate() {
+        println!("{}) {}: {}", i + 1, name.green(), *points)
     }
-    println!("\nCalcolata in {:.3} secondi", start.elapsed().as_secs_f32())
+    println!(
+        "\nCalcolata in {:.3} secondi",
+        start.elapsed().as_secs_f32()
+    )
 }
