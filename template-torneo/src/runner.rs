@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use indicatif::ParallelProgressIterator;
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 
 use crate::{FnToImpl, LogTradimento};
@@ -41,7 +42,11 @@ impl MatchTradimento {
 fn match_making(v: &[(String, FnToImpl)]) -> Vec<((String, FnToImpl), (String, FnToImpl))> {
     let mut x = Vec::<((String, FnToImpl), (String, FnToImpl))>::new();
     for (index, val) in v.iter().enumerate() {
+<<<<<<< HEAD
         for other in v.iter().skip(index + 1) {
+=======
+        for other in v.iter().skip(index) {
+>>>>>>> d4e4b26baea72530b759ad492c6b65fa05d73543
             x.push((val.clone(), other.clone()));
         }
     }
@@ -53,6 +58,7 @@ pub fn run_turnament(da_valutare: &[(String, FnToImpl)], n: usize) -> Vec<(Strin
     //compute matches
     let v: Vec<(String, i64)> = matches
         .par_iter()
+        .progress()
         .map(|((a_name, a_func), (b_name, b_func))| {
             let (pen_a, pen_b) = MatchTradimento::new(*a_func, *b_func).compute(n);
             vec![(a_name.clone(), pen_a), (b_name.clone(), pen_b)]

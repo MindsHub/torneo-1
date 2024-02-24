@@ -11,3 +11,4 @@ template-torneo = {path ="../template-torneo"}
 alessio-1 = {path ="../alessio-1"}
 alessio-2 = {path ="../alessio-2"}
 leo_2 = { version = "0.1.0", path = "../leo_2" }
+mattiaz_2 = {path ="../mattiaz_2"}
