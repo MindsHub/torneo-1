@@ -42,11 +42,7 @@ impl MatchTradimento {
 fn match_making(v: &[(String, FnToImpl)]) -> Vec<((String, FnToImpl), (String, FnToImpl))> {
     let mut x = Vec::<((String, FnToImpl), (String, FnToImpl))>::new();
     for (index, val) in v.iter().enumerate() {
-<<<<<<< HEAD
-        for other in v.iter().skip(index + 1) {
-=======
         for other in v.iter().skip(index) {
->>>>>>> d4e4b26baea72530b759ad492c6b65fa05d73543
             x.push((val.clone(), other.clone()));
         }
     }
