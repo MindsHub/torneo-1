@@ -1,6 +1,7 @@
 use std::{collections::HashMap, time::Instant};
 
 use indicatif::ParallelProgressIterator;
+use rand::rngs::ThreadRng;
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 
 use crate::{FnToImpl, LogTradimento};
@@ -20,11 +21,13 @@ impl MatchTradimento {
         }
     }
     ///esegue molti scontri tra individui
-    pub fn compute(&mut self, n: usize, a_name: &str, b_name: &str) -> (i64, i64) {
-        let t = Instant::now();
+    pub fn compute(&mut self, n: usize, _a_name: &str, _b_name: &str) -> (i64, i64) {
+        let _t = Instant::now();
+        let mut a_rng = ThreadRng::default();
+        let mut b_rng = ThreadRng::default();
         for _ in 0..n {
-            let resp_a = self.player_a.1(&self.player_a.0, &self.player_b.0);
-            let resp_b = self.player_b.1(&self.player_b.0, &self.player_a.0);
+            let resp_a = self.player_a.1(&self.player_a.0, &self.player_b.0, &mut a_rng);
+            let resp_b = self.player_b.1(&self.player_b.0, &self.player_a.0, &mut b_rng);
             self.player_a.0.aggiungi_azione(resp_a);
             self.player_b.0.aggiungi_azione(resp_b);
             let (pen_a, pen_b) = match (resp_a, resp_b) {
@@ -36,7 +39,7 @@ impl MatchTradimento {
             self.player_a.0.penalita += pen_a;
             self.player_b.0.penalita += pen_b;
         }
-        println!("{} {} {}",t.elapsed().as_secs_f32(), a_name, b_name);
+        //println!("{} {} {}",t.elapsed().as_secs_f32(), a_name, b_name);
         (self.player_a.0.penalita, self.player_b.0.penalita)
     }
 }

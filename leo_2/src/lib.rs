@@ -1,4 +1,5 @@
 
+use rand::rngs::ThreadRng;
 use template_torneo::LogTradimento;
 // /// Scegliete quando incolpare il vostro avversario e quando no. Che v
 /**
@@ -11,7 +12,7 @@ use template_torneo::LogTradimento;
     risponde true
  */
 //static boh: f32 = 0.0;
-pub fn devo_incolparlo(me: &LogTradimento, other: &LogTradimento) -> bool {
+pub fn devo_incolparlo(me: &LogTradimento, other: &LogTradimento, _rng: &mut ThreadRng) -> bool {
     if other.azioni_passate().len() < 5{
         false
     }else{

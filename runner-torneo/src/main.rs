@@ -19,13 +19,13 @@ fn main() {
     register_crate!(alessio_1, alessio_2, leo_2, mattiaz_2, mattiaz_1, leo_1, bot_1, bot_2);
     
     //calcolo classifica
-    let scoreboard=runner::run_turnament(&da_valutare, 2_000_000);
+    let scoreboard=runner::run_turnament(&da_valutare, 700_000_000);
 
 
     //visualizzazione classifica
-    println!("Posizione Nome Punteggio");
+    println!("{:^15}|{:^15}|{:^15}", "Posizione", "Nome", "Punteggio");
     for (i, (name, points)) in scoreboard.iter().enumerate() {
-        println!("{}) {}: {}", i + 1, name.green(), *points)
+        println!("{:^15}|{:^15}|{:^15}", i + 1, name.green(), *points)
     }
     println!(
         "\nCalcolata in {:.3} secondi",

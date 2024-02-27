@@ -1,3 +1,5 @@
+use rand::rngs::ThreadRng;
+
 pub mod runner;
 
 pub struct LogTradimento {
@@ -6,7 +8,7 @@ pub struct LogTradimento {
     penalita: i64,
 }
 
-pub type FnToImpl = fn(&LogTradimento, &LogTradimento) -> bool;
+pub type FnToImpl = fn(&LogTradimento, &LogTradimento, &mut ThreadRng) -> bool;
 #[allow(clippy::new_without_default)]
 impl LogTradimento {
     /// quanti veri ha mandato questo giocatore?
