@@ -1,4 +1,4 @@
-use rand::{rngs::OsRng, Rng};
+use rand::{rngs::ThreadRng, Rng};
 use template_torneo::LogTradimento;
 
 const ITEMS: usize = 5;
@@ -9,7 +9,7 @@ const ITEMS: usize = 5;
 // none accused: 1 sec -> weight: 0.5
 
 
-pub fn test_1(_me: &LogTradimento, _other: &LogTradimento) -> bool {
+pub fn test_1(_me: &LogTradimento, _other: &LogTradimento, rng: &mut ThreadRng) -> bool {
     const BOTH_ACCUSED_WEIGHT: f64 = 0.7;
     const WAS_ACCUSED_WEIGHT:  f64 = 2.0;
     const ONLY_ACCUSED_WEIGHT: f64 = 0.3;
@@ -41,7 +41,7 @@ pub fn test_1(_me: &LogTradimento, _other: &LogTradimento) -> bool {
         if p > 1.0 {
             return true;
         } else {
-            return OsRng.gen_bool(p);
+            return rng.gen_bool(p);
         }
     } else {
         return true;
@@ -61,6 +61,6 @@ pub fn test_2(_me: &LogTradimento, _other: &LogTradimento) -> bool {
 }
 
 /// Scegliete quando incolpare il vostro avversario e quando no. Che vinca il migliore!!
-pub fn devo_incolparlo(_me: &LogTradimento, _other: &LogTradimento) -> bool {
+pub fn devo_incolparlo(_me: &LogTradimento, _other: &LogTradimento, _rng: &mut ThreadRng) -> bool {
     return test_2(_me, _other);
 }

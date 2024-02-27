@@ -19,7 +19,7 @@ fn main() {
     register_crate!(alessio_1, alessio_2, leo_2, mattiaz_2, mattiaz_1, leo_1, bot_1, bot_2, davide);
     
     //calcolo classifica
-    let scoreboard=runner::run_turnament(&da_valutare, 700_000_000);
+    let scoreboard=runner::run_turnament(&da_valutare, 200_000_000);
 
 
     //visualizzazione classifica
