@@ -1,4 +1,4 @@
-use rand::{rngs::OsRng, Rng};
+
 use template_torneo::LogTradimento;
 // /// Scegliete quando incolpare il vostro avversario e quando no. Che v
 /**
@@ -10,7 +10,7 @@ use template_torneo::LogTradimento;
 -altrimenti:
     risponde true
  */
-static boh: f32 = 0.0;
+//static boh: f32 = 0.0;
 pub fn devo_incolparlo(me: &LogTradimento, other: &LogTradimento) -> bool {
     if other.azioni_passate().len() < 5{
         false
@@ -54,7 +54,7 @@ pub fn devo_incolparlo(me: &LogTradimento, other: &LogTradimento) -> bool {
 
 
 
-use template_torneo::*;
+/*use template_torneo::*;
 
 macro_rules! register_crate {
     ($($e:ident),*) => {
@@ -64,7 +64,7 @@ macro_rules! register_crate {
         }
     };
 }
-
+/
 fn esegui_torneo()->i64{
     //let start = Instant::now();
     let mut da_valutare=
@@ -84,4 +84,4 @@ fn esegui_torneo()->i64{
 fn testare(){
     println!("{}", esegui_torneo());
     panic!("aiut:(")
-}
+}*/

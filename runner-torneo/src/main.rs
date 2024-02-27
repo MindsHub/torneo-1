@@ -16,10 +16,10 @@ fn main() {
     let start = Instant::now();
     let da_valutare=
     //aggiungi il tuo crate qua sotto: v
-    register_crate!(alessio_1, alessio_2, leo_2, mattiaz_2, leo_1, bot_1, bot_2);
+    register_crate!(alessio_1, alessio_2, leo_2, mattiaz_2, mattiaz_1, leo_1, bot_1, bot_2);
     
     //calcolo classifica
-    let scoreboard=runner::run_turnament(&da_valutare, 1000000);
+    let scoreboard=runner::run_turnament(&da_valutare, 200_000_000);
 
 
     //visualizzazione classifica

@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, time::Instant};
 
 use indicatif::ParallelProgressIterator;
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
@@ -20,7 +20,8 @@ impl MatchTradimento {
         }
     }
     ///esegue molti scontri tra individui
-    pub fn compute(&mut self, n: usize) -> (i64, i64) {
+    pub fn compute(&mut self, n: usize, a_name: &str, b_name: &str) -> (i64, i64) {
+        let t = Instant::now();
         for _ in 0..n {
             let resp_a = self.player_a.1(&self.player_a.0, &self.player_b.0);
             let resp_b = self.player_b.1(&self.player_b.0, &self.player_a.0);
@@ -35,6 +36,7 @@ impl MatchTradimento {
             self.player_a.0.penalita += pen_a;
             self.player_b.0.penalita += pen_b;
         }
+        println!("{} {} {}",t.elapsed().as_secs_f32(), a_name, b_name);
         (self.player_a.0.penalita, self.player_b.0.penalita)
     }
 }
@@ -56,7 +58,7 @@ pub fn run_turnament(da_valutare: &[(String, FnToImpl)], n: usize) -> Vec<(Strin
         .par_iter()
         .progress()
         .map(|((a_name, a_func), (b_name, b_func))| {
-            let (pen_a, pen_b) = MatchTradimento::new(*a_func, *b_func).compute(n);
+            let (pen_a, pen_b) = MatchTradimento::new(*a_func, *b_func).compute(n, a_name, b_name);
             vec![(a_name.clone(), pen_a), (b_name.clone(), pen_b)]
         })
         .flatten()
