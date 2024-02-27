@@ -3,9 +3,10 @@ resolver = "2"
 
 members = [
     "runner-torneo",
-    "template-torneo", 
+    "template-torneo",
     "alessio-1",
     "alessio-2",
     "leo_2", "leo_1", "bot_1", "bot_2",
+    "davide",
 ]
 #[workspace.dependencies]
