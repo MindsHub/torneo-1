@@ -5,9 +5,7 @@ pub fn devo_incolparlo(_me: &LogTradimento, _other: &LogTradimento) -> bool {
     let x = 2;
     if x == 2 {
         return true;
-
-    }else {
+    } else {
         return false;
     }
-    
 }
