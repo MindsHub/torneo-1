@@ -56,7 +56,6 @@ fn match_making(v: &[(String, FnToImpl)]) -> Vec<((String, FnToImpl), (String, F
 
 pub fn run_turnament(da_valutare: &[(String, FnToImpl)], n: usize) -> Vec<(String, i64)> {
     let matches = match_making(da_valutare);
-    println!("{:?}", matches);
     //compute matches
     let v: Vec<(String, i64)> = matches
         .par_iter()

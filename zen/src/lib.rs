@@ -2,7 +2,7 @@ use rand::rngs::ThreadRng;
 use template_torneo::LogTradimento;
 
 /// Scegliete quando incolpare il vostro avversario e quando no. Che vinca il migliore!!
-pub fn devo_incolparlo(me: &LogTradimento, other: &LogTradimento, rng: &mut ThreadRng) -> bool {
+pub fn devo_incolparlo(_me: &LogTradimento, other: &LogTradimento, _rng: &mut ThreadRng) -> bool {
     if other.numero_totali() < 10 {
         //determinazione risposte avversario
         return false;
@@ -32,5 +32,5 @@ pub fn devo_incolparlo(me: &LogTradimento, other: &LogTradimento, rng: &mut Thre
             return true;
         }
     }
-    
+
 }
