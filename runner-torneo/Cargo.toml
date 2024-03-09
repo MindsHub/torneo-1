@@ -10,5 +10,12 @@ colored="2.0"
 template-torneo = {path ="../template-torneo"}
 alessio-1 = {path ="../alessio-1"}
 alessio-2 = {path ="../alessio-2"}
+mattiaz_1 = {path ="../mattiaz_1"}
 mattiaz_2 = {path ="../mattiaz_2"}
 fabio = { version = "0.1.0", path = "../fabio" }
+davide = { version = "0.1.0", path = "../davide" }
+leo_1 = { version = "0.1.0", path = "../leo_1" }
+leo_2 = { version = "0.1.0", path = "../leo_2" }
+bot_1 = { version = "0.1.0", path = "../bot_1" }
+bot_2 = { version = "0.1.0", path = "../bot_2" }
+zen = { version = "0.1.0", path = "../zen" }

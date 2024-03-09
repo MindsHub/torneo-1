@@ -1,6 +1,7 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, time::Instant};
 
 use indicatif::ParallelProgressIterator;
+use rand::rngs::ThreadRng;
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 
 use crate::{FnToImpl, LogTradimento};
@@ -13,17 +14,20 @@ pub struct MatchTradimento {
 
 impl MatchTradimento {
     /// costruttore
-    pub fn new(player_a: FnToImpl, player_b: FnToImpl)->Self{
-        Self{
+    pub fn new(player_a: FnToImpl, player_b: FnToImpl) -> Self {
+        Self {
             player_a: (LogTradimento::new(), player_a),
             player_b: (LogTradimento::new(), player_b),
         }
     }
     ///esegue molti scontri tra individui
-    pub fn compute(&mut self, n:usize)->(i64, i64){
+    pub fn compute(&mut self, n: usize, _a_name: &str, _b_name: &str) -> (i64, i64) {
+        let _t = Instant::now();
+        let mut a_rng = ThreadRng::default();
+        let mut b_rng = ThreadRng::default();
         for _ in 0..n {
-            let resp_a = self.player_a.1(&self.player_a.0, &self.player_b.0);
-            let resp_b = self.player_b.1(&self.player_b.0, &self.player_a.0);
+            let resp_a = self.player_a.1(&self.player_a.0, &self.player_b.0, &mut a_rng);
+            let resp_b = self.player_b.1(&self.player_b.0, &self.player_a.0, &mut b_rng);
             self.player_a.0.aggiungi_azione(resp_a);
             self.player_b.0.aggiungi_azione(resp_b);
             let (pen_a, pen_b) = match (resp_a, resp_b) {
@@ -35,12 +39,10 @@ impl MatchTradimento {
             self.player_a.0.penalita += pen_a;
             self.player_b.0.penalita += pen_b;
         }
+        //println!("{} {} {}",t.elapsed().as_secs_f32(), a_name, b_name);
         (self.player_a.0.penalita, self.player_b.0.penalita)
     }
 }
-
-
-
 
 fn match_making(v: &[(String, FnToImpl)]) -> Vec<((String, FnToImpl), (String, FnToImpl))> {
     let mut x = Vec::<((String, FnToImpl), (String, FnToImpl))>::new();
@@ -52,29 +54,32 @@ fn match_making(v: &[(String, FnToImpl)]) -> Vec<((String, FnToImpl), (String, F
     x
 }
 
-pub fn run_turnament(da_valutare: &[(String, FnToImpl)], n: usize)->Vec<(String, i64)>{
+pub fn run_turnament(da_valutare: &[(String, FnToImpl)], n: usize) -> Vec<(String, i64)> {
     let matches = match_making(da_valutare);
+    println!("{:?}", matches);
     //compute matches
     let v: Vec<(String, i64)> = matches
         .par_iter()
         .progress()
         .map(|((a_name, a_func), (b_name, b_func))| {
-            let (pen_a, pen_b) =MatchTradimento::new(*a_func, *b_func).compute(n);
+            let (pen_a, pen_b) = MatchTradimento::new(*a_func, *b_func).compute(n, a_name, b_name);
             vec![(a_name.clone(), pen_a), (b_name.clone(), pen_b)]
         })
         .flatten()
         .collect();
 
     //computing scoreboard
-    let mut scoreboard: HashMap::<String, i64>=   da_valutare.iter().map(|(s, _)| (s.clone(), 0)).collect();
-    for (key, val) in v{
-        if let Some(x) = scoreboard.get_mut(&key){
-            *x+=val;
-        }else{
+    let mut scoreboard: HashMap<String, i64> =
+        da_valutare.iter().map(|(s, _)| (s.clone(), 0)).collect();
+    for (key, val) in v {
+        if let Some(x) = scoreboard.get_mut(&key) {
+            *x += val;
+        } else {
             scoreboard.insert(key, val);
         }
     }
-    let mut scoreboard: Vec<(String, i64)> = scoreboard.iter().map(|(a, b)| (a.clone(), *b)).collect();
+    let mut scoreboard: Vec<(String, i64)> =
+        scoreboard.iter().map(|(a, b)| (a.clone(), *b)).collect();
     scoreboard.sort_by_key(|(_, x)| *x);
     scoreboard.to_owned()
 }
